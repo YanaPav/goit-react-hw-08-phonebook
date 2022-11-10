@@ -7,6 +7,7 @@ import {
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
 import { edit } from '../../redux/contacts/contactsOperations';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const EditForm = ({ id, name, number, closeEditForm }) => {
   const contacts = useSelector(selectContacts);
@@ -62,41 +63,42 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={newName}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Number
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={newNumber}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit" disabled={isLoading === 'edit'}>
-        Сonfirm
-      </button>
-      <button
-        type="button"
-        onClick={closeEditForm}
-        disabled={isLoading === 'edit'}
-      >
-        Cancel
-      </button>
-    </form>
+    <div>
+      <AccountCircleIcon />
+      <form onSubmit={handleSubmit}>
+        <label>
+          <input
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            value={newName}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={newNumber}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit" disabled={isLoading === 'edit'}>
+          Сonfirm
+        </button>
+        <button
+          type="button"
+          onClick={closeEditForm}
+          disabled={isLoading === 'edit'}
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
   );
 };
