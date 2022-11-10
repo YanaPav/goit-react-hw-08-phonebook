@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import css from './ContactForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { addContact } from 'redux/operations';
+import { StyledForm } from '../Common/StyledForm.styled';
+import {
+  selectContacts,
+  selectLoading,
+  selectContactsError,
+} from 'redux/contacts/contactsSelectors';
+import { add } from 'redux/contacts/contactsOperations';
+import TextField from '@mui/material/TextField';
+import { CustomBtn } from '../Common/CustomBtn.styled';
 
 export const ContactForm = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const isLoading = useSelector(state => state.contacts.isLoading);
-  const error = useSelector(state => state.contacts.error);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectContactsError);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const isDuplicate = name => {
     const result = contacts?.find(
-      contactItem => contactItem.name.toLowerCase() === name.toLowerCase()
+      contactItem => contactItem.name?.toLowerCase() === name.toLowerCase()
     );
     return result;
   };
@@ -29,7 +36,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact(contactObject));
+    dispatch(add(contactObject));
     resetState();
   };
 
@@ -37,7 +44,7 @@ export const ContactForm = () => {
     const { name, value } = e.target;
 
     if (name === 'name') setName(value);
-    if (name === 'phone') setPhone(value);
+    if (name === 'number') setNumber(value);
   };
 
   const handleSubmit = e => {
@@ -45,7 +52,7 @@ export const ContactForm = () => {
 
     const contactObj = {
       name,
-      phone,
+      number,
     };
 
     addContactToStore(contactObj);
@@ -53,38 +60,42 @@ export const ContactForm = () => {
 
   const resetState = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <label>
-        Name
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={name}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Number
-        <input
-          type="tel"
-          name="phone"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={phone}
-          onChange={handleChange}
-        />
-      </label>
-      <button type="submit" disabled={isLoading === 'add'}>
-        {isLoading === 'add' ? 'Adding...' : 'Add contact'}
-      </button>
-    </form>
+    <StyledForm onSubmit={handleSubmit}>
+      <TextField
+        id="outlined-basic"
+        label="Name"
+        variant="outlined"
+        type="text"
+        name="name"
+        size="small"
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        required
+        value={name}
+        onChange={handleChange}
+      />
+
+      <TextField
+        id="outlined-basic"
+        label="Number"
+        variant="outlined"
+        type="tel"
+        name="number"
+        size="small"
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        required
+        value={number}
+        onChange={handleChange}
+      />
+
+      <CustomBtn type="submit" disabled={isLoading === 'add'}>
+        <span>{isLoading === 'add' ? 'Adding...' : 'Add contact'}</span>
+      </CustomBtn>
+    </StyledForm>
   );
 };

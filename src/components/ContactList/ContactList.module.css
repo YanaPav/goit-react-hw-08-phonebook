@@ -1,8 +1,0 @@
-.contactsList li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-.contactsList {
-    padding-left: 18px;
-    
-}
