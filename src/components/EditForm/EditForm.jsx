@@ -1,14 +1,27 @@
+// react
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+// libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TextField from '@mui/material/TextField';
+// redux-components
 import {
   selectContacts,
   selectLoading,
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
-import { edit } from '../../redux/contacts/contactsOperations';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { edit } from 'redux/contacts/contactsOperations';
+// components
+import {
+  StyledForm,
+  EditIcon,
+  DeleteIcon,
+  ButtonWrap,
+} from './EditForm.styled';
 
+//
 export const EditForm = ({ id, name, number, closeEditForm }) => {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectLoading);
@@ -16,6 +29,9 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   const dispatch = useDispatch();
   const [newName, setNewName] = useState(name);
   const [newNumber, setNewNumber] = useState(number);
+
+  const editFormBtn = document.getElementById(`editFormBtn${id}`);
+  const editFormBtnText = document.getElementById(`editFormBtnText${id}`);
 
   const isDuplicate = newName => {
     const result = contacts?.find(
@@ -27,6 +43,38 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   useEffect(() => {
     error?.type === 'edit' && Notify.failure(`${error.message}`);
   }, [error]);
+
+  useEffect(() => {
+    window.addEventListener('click', editFormClickHandler);
+
+    const editFormName = document.getElementById(`editFormName${id}`);
+    const editFormNumber = document.getElementById(`editFormNumber${id}`);
+    const closeEditFormBtn = document.getElementById(`closeEditFormBtn${id}`);
+    const submitEditFormBtn = document.getElementById(`submitEditFormBtn${id}`);
+    const editFormCloseIcon = document.getElementById(`editFormCloseIcon${id}`);
+    const editFormSubmitIcon = document.getElementById(
+      `editFormSubmitIcon${id}`
+    );
+
+    function editFormClickHandler({ target }) {
+      console.log(target);
+      const isClickOutEditForm =
+        target !== editFormName &&
+        target !== editFormNumber &&
+        target !== closeEditFormBtn &&
+        target !== submitEditFormBtn &&
+        target !== editFormBtn &&
+        target !== editFormBtnText &&
+        target !== editFormCloseIcon &&
+        target !== editFormSubmitIcon &&
+        target !== editFormSubmitIcon.children[0];
+      // остання умова - обробка бага при натисканні на path елемента svg
+
+      if (isClickOutEditForm) closeEditForm();
+    }
+
+    return () => window.removeEventListener('click', editFormClickHandler);
+  }, [closeEditForm, editFormBtn, editFormBtnText, id]);
 
   const addContactToStore = contactObject => {
     if (isDuplicate(contactObject.name)) {
@@ -63,42 +111,57 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   };
 
   return (
-    <div>
+    <StyledForm onSubmit={handleSubmit}>
       <AccountCircleIcon />
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            value={newName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            value={newNumber}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" disabled={isLoading === 'edit'}>
-          Сonfirm
+      <TextField
+        id={`editFormName${id}`}
+        variant="filled"
+        size="small"
+        type="text"
+        name="name"
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        required
+        value={newName}
+        onChange={handleChange}
+      />
+
+      <TextField
+        id={`editFormNumber${id}`}
+        variant="filled"
+        size="small"
+        type="tel"
+        name="number"
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        required
+        value={newNumber}
+        onChange={handleChange}
+      />
+      <ButtonWrap>
+        <button
+          id={`closeEditFormBtn${id}`}
+          type="button"
+          disabled={isLoading === 'edit'}
+          onClick={closeEditForm}
+        >
+          <DeleteIcon id={`editFormCloseIcon${id}`} />
         </button>
         <button
-          type="button"
-          onClick={closeEditForm}
+          id={`submitEditFormBtn${id}`}
+          type="submit"
           disabled={isLoading === 'edit'}
         >
-          Cancel
+          <EditIcon id={`editFormSubmitIcon${id}`} />
         </button>
-      </form>
-    </div>
+      </ButtonWrap>
+    </StyledForm>
   );
+};
+
+EditForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  closeEditForm: PropTypes.func.isRequired,
 };

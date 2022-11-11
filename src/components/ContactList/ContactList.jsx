@@ -1,16 +1,21 @@
+// react
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// libraries
 import CircularProgress from '@mui/material/CircularProgress';
+// redux-components
 import { fetch } from 'redux/contacts/contactsOperations';
-import { ContactItem } from '../ContactItem/ContactItem';
 import { selectFilter } from 'redux/filter/filterSelectors';
 import {
   selectContacts,
   selectLoading,
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
+// components
+import { ContactItem } from '../ContactItem/ContactItem';
 import { StyledList } from './ContactList.styled';
 
+//
 export const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectLoading);

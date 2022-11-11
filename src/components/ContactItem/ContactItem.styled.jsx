@@ -1,5 +1,3 @@
-// import ClearIcon from '@mui/icons-material/Clear';
-// import CreateIcon from '@mui/icons-material/Create';
 import styled from 'styled-components';
 
 export const StyledItem = styled.li`
@@ -30,14 +28,6 @@ export const StyledBtn = styled.button`
     transform: scale(1.05);
   }
 `;
-
-// export const DeleteIcon = styled(ClearIcon)`
-//   color: #b13232;
-// `;
-
-// export const EditIcon = styled(CreateIcon)`
-//   color: gray;
-// `;
 
 export const ButtonWrap = styled.div`
   display: flex;

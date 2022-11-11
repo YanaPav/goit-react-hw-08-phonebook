@@ -1,18 +1,22 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { SignupForm } from './SignupForm/SignupForm';
-import { LoginForm } from './LoginForm/LoginForm';
-import { NavBar } from './NavBar/NavBar';
-import { current } from 'redux/auth/authOperations';
-import { useEffect } from 'react';
+// react
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+// redux-components
+import { current } from 'redux/auth/authOperations';
 import { selectIsLoading } from 'redux/auth/authSelectors';
-import { Loader } from 'components/Common/Loader.styled';
+// pages
+import { HomePage } from '../pages/HomePage/HomePage';
+import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { ContactsPage } from '../pages/ContactsPage/ContactsPage';
+// components
+import { SignupForm } from './SignupForm/SignupForm';
+import { NavBar } from './NavBar/NavBar';
+import { Loader } from './Common/Loader.styled';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
-import { HomePage } from '../pages/HomePage/HomePage';
 
+//
 export const App = () => {
   const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
@@ -31,7 +35,7 @@ export const App = () => {
             <Route element={<PublicRoute />}>
               <Route index element={<HomePage />} />
               <Route path="/signup" element={<SignupForm />} />
-              <Route path="/login" element={<LoginForm />} />
+              <Route path="/login" element={<LoginPage />} />
             </Route>
             <Route element={<PrivateRoute />}>
               <Route path="/contacts" element={<ContactsPage />} />

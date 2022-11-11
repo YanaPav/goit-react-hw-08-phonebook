@@ -1,12 +1,14 @@
+// libraries
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { StyledLogo } from './Logo.styled';
+// components
+import { StyledLogoLink } from './Logo.styled';
 
 export const Logo = () => {
   return (
-    <StyledLogo>
+    <StyledLogoLink to="/">
       Ph
       <AccountCircleIcon />
       neBOOK
-    </StyledLogo>
+    </StyledLogoLink>
   );
 };

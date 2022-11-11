@@ -43,7 +43,6 @@ const contactsSlice = createSlice({
             state.error = null
         },
         [remove.fulfilled](state, { payload }) {
-            console.log(payload)
             state.loading = false
             state.items = state.items.filter(contact => contact.id !== payload.id)
         },  

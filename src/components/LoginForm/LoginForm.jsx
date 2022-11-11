@@ -1,10 +1,15 @@
+// react
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+// libraries
+import TextField from '@mui/material/TextField';
+// redux-components
 import { login } from 'redux/auth/authOperations';
+// components
 import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
 
+//
 export const LoginForm = () => {
   const loginForm = useRef(null);
   const dispatch = useDispatch();
@@ -21,34 +26,31 @@ export const LoginForm = () => {
   };
 
   return (
-    <>
-      <StyledForm ref={loginForm} onSubmit={onSubmit}>
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            required
-          />
-        </label>
-        <CustomBtn type="submit">
-          <span>Log in</span>
-        </CustomBtn>
-      </StyledForm>
+    <StyledForm ref={loginForm} onSubmit={onSubmit}>
+      <TextField
+        // id="filled-basic"
+        label="Email"
+        variant="filled"
+        size="small"
+        type="email"
+        name="email"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        required
+      />
 
-      <div>
-        Don't have an account? <Link to="/signup">Sign up</Link>
-      </div>
-    </>
+      <TextField
+        // id="filled-basic"
+        label="Password"
+        variant="filled"
+        size="small"
+        type="password"
+        name="password"
+        // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        required
+      />
+      <CustomBtn type="submit">
+        <span>Log in</span>
+      </CustomBtn>
+    </StyledForm>
   );
 };

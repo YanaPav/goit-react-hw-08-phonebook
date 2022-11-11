@@ -1,3 +1,4 @@
+// components
 import { StyledNavLink } from './GuestMenu.styled';
 import { MenuBox } from '../Common/MenuBox.styled';
 

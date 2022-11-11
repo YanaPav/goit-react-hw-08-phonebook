@@ -1,8 +1,14 @@
+// react
 import { useSelector, useDispatch } from 'react-redux';
+// libraries
+import TextField from '@mui/material/TextField';
+// redux-components
 import { addFilter } from 'redux/filter/filterSlice';
 import { selectFilter } from 'redux/filter/filterSelectors';
-import { FilterInput } from './Filter.styled';
+// components
+import { StyledForm } from '../Common/StyledForm.styled';
 
+//
 export const Filter = () => {
   const filterValue = useSelector(selectFilter);
   const dispatch = useDispatch();
@@ -12,14 +18,17 @@ export const Filter = () => {
   };
 
   return (
-    <label>
-      Find contact by name
-      <FilterInput
+    <StyledForm>
+      <TextField
+        id="filterInput"
+        label="Find contact by name"
+        variant="filled"
         type="text"
         name="filter"
+        size="small"
         value={filterValue}
         onChange={handlerFilterChange}
       />
-    </label>
+    </StyledForm>
   );
 };

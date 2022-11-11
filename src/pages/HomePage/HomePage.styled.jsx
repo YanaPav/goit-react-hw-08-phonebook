@@ -1,32 +1,38 @@
 import styled from 'styled-components';
-import { Logo } from '../../components/Logo/Logo';
+// react
 import { Link } from 'react-router-dom';
 
 export const HomePageWrap = styled.div`
-  align-items: center;
   margin-top: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+
+  @media screen and (min-width: 430px) {
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
 
   img {
     margin-right: -60px;
   }
-
-  span {
-    max-width: 200px;
-
-    a {
-      margin-top: 8px;
-      display: block;
-    }
-  }
 `;
 
-export const DarkLogo = styled(Logo)`
-  span {
-    color: black;
+export const HomePageText = styled.span`
+  max-width: 300px;
+  display: block;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  a {
+    margin-top: 8px;
+    display: block;
+  }
+
+  @media screen and (min-width: 430px) {
+    max-width: 300px;
   }
 `;
 

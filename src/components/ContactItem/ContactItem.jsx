@@ -1,18 +1,22 @@
+// react
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+// libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { remove } from 'redux/contacts/contactsOperations';
-import { CustomBtn } from '../Common/CustomBtn.styled';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// redux-components
 import {
   selectLoading,
   selectContactsError,
-} from '../../redux/contacts/contactsSelectors';
+} from 'redux/contacts/contactsSelectors';
+import { remove } from 'redux/contacts/contactsOperations';
+// components
+import { CustomBtn } from '../Common/CustomBtn.styled';
 import { EditForm } from '../EditForm/EditForm';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { StyledItem, ButtonWrap } from './ContactItem.styled';
 
+//
 export const ContactItem = ({ name, number, id }) => {
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectContactsError);
@@ -32,13 +36,15 @@ export const ContactItem = ({ name, number, id }) => {
             {name}: {number}
             <ButtonWrap>
               <CustomBtn
+                id={`editFormBtn${id}`}
                 type="button"
                 disabled={isLoading === id}
                 onClick={() => setIsEditing(true)}
               >
-                <span>Edit</span>
+                <span id={`editFormBtnText${id}`}>Edit</span>
               </CustomBtn>
               <CustomBtn
+                id="deleteBtn"
                 type="button"
                 disabled={isLoading === id}
                 onClick={() => dispatch(remove(id))}

@@ -1,16 +1,21 @@
+// react
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserEmail } from '../../redux/auth/authSelectors';
-import { MenuBox } from '../Common/MenuBox.styled';
-import { logout } from 'redux/auth/authOperations';
+// libraries
 import LogoutIcon from '@mui/icons-material/Logout';
+// redux-components
+import { selectUserName } from '../../redux/auth/authSelectors';
+import { logout } from 'redux/auth/authOperations';
+// components
+import { MenuBox } from '../Common/MenuBox.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
 
+//
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const userEmail = useSelector(selectUserEmail);
+  const userName = useSelector(selectUserName);
   return (
     <MenuBox>
-      <p>{userEmail}</p>
+      <p>Hi, {userName}</p>
       <CustomBtn
         size="small"
         variant="text"

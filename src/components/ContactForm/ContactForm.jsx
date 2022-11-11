@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+// react
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { StyledForm } from '../Common/StyledForm.styled';
+import TextField from '@mui/material/TextField';
+// redux-components
+import { add } from 'redux/contacts/contactsOperations';
 import {
   selectContacts,
   selectLoading,
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
-import { add } from 'redux/contacts/contactsOperations';
-import TextField from '@mui/material/TextField';
+// components
+import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
 
+//
 export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectLoading);
@@ -66,9 +71,9 @@ export const ContactForm = () => {
   return (
     <StyledForm onSubmit={handleSubmit}>
       <TextField
-        id="outlined-basic"
+        id="contactFormName"
         label="Name"
-        variant="outlined"
+        variant="filled"
         type="text"
         name="name"
         size="small"
@@ -80,9 +85,9 @@ export const ContactForm = () => {
       />
 
       <TextField
-        id="outlined-basic"
+        id="contactFormNumber"
         label="Number"
-        variant="outlined"
+        variant="filled"
         type="tel"
         name="number"
         size="small"

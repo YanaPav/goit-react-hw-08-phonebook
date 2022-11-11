@@ -1,9 +1,15 @@
+// react
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+// libraries
+import TextField from '@mui/material/TextField';
+// redux-components
 import { signUp } from 'redux/auth/authOperations';
+// components
 import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
 
+//
 export const SignupForm = () => {
   const signUpForm = useRef(null);
   const dispatch = useDispatch();
@@ -23,8 +29,11 @@ export const SignupForm = () => {
     <>
       <StyledForm ref={signUpForm} onSubmit={onSubmit}>
         <label>
-          Name
-          <input
+          <TextField
+            // id="filled-basic"
+            label="Name"
+            variant="filled"
+            size="small"
             type="text"
             name="name"
             // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -32,8 +41,11 @@ export const SignupForm = () => {
           />
         </label>
         <label>
-          Email
-          <input
+          <TextField
+            // id="filled-basic"
+            label="Email"
+            variant="filled"
+            size="small"
             type="email"
             name="email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -41,8 +53,11 @@ export const SignupForm = () => {
           />
         </label>
         <label>
-          Password
-          <input
+          <TextField
+            id="filled-basic"
+            label="Password"
+            variant="filled"
+            size="small"
             type="password"
             name="password"
             // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
