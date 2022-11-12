@@ -2,7 +2,6 @@
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // libraries
-import TextField from '@mui/material/TextField';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // redux-components
 import { signUp } from 'redux/auth/authOperations';
@@ -10,6 +9,7 @@ import { selectAuthError } from 'redux/auth/authSelectors';
 // components
 import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
+import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
 export const SignupForm = () => {
@@ -35,8 +35,7 @@ export const SignupForm = () => {
   return (
     <>
       <StyledForm ref={signUpForm} onSubmit={onSubmit}>
-        <TextField
-          // id="filled-basic"
+        <StyledTextField
           label="Name"
           variant="filled"
           size="small"
@@ -45,8 +44,7 @@ export const SignupForm = () => {
           // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           required
         />
-        <TextField
-          // id="filled-basic"
+        <StyledTextField
           label="Email"
           variant="filled"
           size="small"
@@ -55,14 +53,13 @@ export const SignupForm = () => {
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           required
         />
-        <TextField
+        <StyledTextField
           id="filled-basic"
           label="Password"
           variant="filled"
           size="small"
           type="password"
           name="password"
-          // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           required
         />
         <CustomBtn type="submit">

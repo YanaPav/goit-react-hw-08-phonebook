@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 // redux-components
 import { current } from 'redux/auth/authOperations';
-import { selectIsLoading } from 'redux/auth/authSelectors';
+import { selectIsLoading, selectToken } from 'redux/auth/authSelectors';
 // pages
 import { HomePage } from '../pages/HomePage/HomePage';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
@@ -19,11 +19,12 @@ import { PublicRoute } from './PublicRoute/PublicRoute';
 //
 export const App = () => {
   const isLoading = useSelector(selectIsLoading);
+  const persistedToken = useSelector(selectToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(current());
-  }, [dispatch]);
+    if (persistedToken) dispatch(current());
+  }, [dispatch, persistedToken]);
 
   return (
     <>
