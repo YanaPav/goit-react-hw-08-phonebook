@@ -10,6 +10,7 @@ import { Header, HeaderWrap } from './NavBar.styled';
 import { GuestMenu } from '../GuestMenu/GuestMenu';
 import { Container } from '../Common/Container.styled';
 import { Logo } from '../Logo/Logo';
+import { Loader } from '../Common/Loader.styled';
 
 //
 export const NavBar = () => {
@@ -26,7 +27,7 @@ export const NavBar = () => {
         </Container>
       </Header>
       <Container>
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </Container>
