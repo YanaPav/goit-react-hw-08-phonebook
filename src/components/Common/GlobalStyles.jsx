@@ -4,7 +4,6 @@ import bg_image from '../../images/bg_image.jpg';
 export const GlobalStyle = createGlobalStyle`
 
     body {
-     /* background:  url(${bg_image}); */
      background: url(${bg_image}) no-repeat center top fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CircularProgress from '@mui/material/CircularProgress';
 // redux-components
 import {
   selectContacts,
@@ -22,6 +21,7 @@ import {
   MobileInputsWrap,
 } from './EditForm.styled';
 import { StyledTextField } from '../Common/StyledTextField.styled';
+import { CircularLoader } from '../Common/CircularLoader.styled';
 
 //
 export const EditForm = ({ id, name, number, closeEditForm }) => {
@@ -138,7 +138,7 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
           />
         </MobileInputsWrap>
         {isLoading === 'edit' ? (
-          <CircularProgress />
+          <CircularLoader />
         ) : (
           <ButtonWrap>
             <button

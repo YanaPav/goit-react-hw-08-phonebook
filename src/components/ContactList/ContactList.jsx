@@ -12,7 +12,7 @@ import {
 // components
 import { ContactItem } from '../ContactItem/ContactItem';
 import { StyledList } from './ContactList.styled';
-import { StyledCircularLoader } from './ContactList.styled';
+import { CircularLoader } from '../Common/CircularLoader.styled';
 
 //
 export const ContactList = () => {
@@ -34,7 +34,7 @@ export const ContactList = () => {
   return (
     <>
       {error?.type === 'fetch' && <div>{error.message}</div>}
-      {isLoading === 'fetch' && <StyledCircularLoader />}
+      {isLoading === 'fetch' && <CircularLoader />}
       {contacts && (
         <StyledList>
           {filtredContacts?.map(({ name, number, id }) => {
