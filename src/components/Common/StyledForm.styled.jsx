@@ -30,14 +30,6 @@ export const StyledForm = styled.form`
     align-self: flex-start;
   }
 
-  label {
-    display: block;
-  }
-
-  label:not(:last-child) {
-    margin-bottom: 10px;
-  }
-
   input {
     margin-top: 6px;
     width: 100%;

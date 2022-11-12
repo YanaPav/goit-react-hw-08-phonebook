@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
 // redux-components
 import {
   selectContacts,
@@ -33,6 +34,8 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   const editFormBtn = document.getElementById(`editFormBtn${id}`);
   const editFormBtnText = document.getElementById(`editFormBtnText${id}`);
 
+  console.log(isLoading);
+
   const isDuplicate = newName => {
     const result = contacts?.find(
       contactItem => contactItem.name?.toLowerCase() === newName?.toLowerCase()
@@ -57,7 +60,6 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     );
 
     function editFormClickHandler({ target }) {
-      console.log(target);
       const isClickOutEditForm =
         target !== editFormName &&
         target !== editFormNumber &&
@@ -76,15 +78,15 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     return () => window.removeEventListener('click', editFormClickHandler);
   }, [closeEditForm, editFormBtn, editFormBtnText, id]);
 
-  const addContactToStore = contactObject => {
+  const addContactToStore = async contactObject => {
     if (isDuplicate(contactObject.name)) {
       Notify.warning(`${contactObject.name} is alredy in contacts`);
       return;
     }
 
-    dispatch(edit({ id: id, body: contactObject }));
-    resetState();
-    closeEditForm();
+    const result = await dispatch(edit({ id: id, body: contactObject }));
+
+    if (!result.error) closeEditForm();
   };
 
   const handleChange = e => {
@@ -105,57 +107,58 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     addContactToStore(contactObj);
   };
 
-  const resetState = () => {
-    setNewName('');
-    setNewNumber('');
-  };
-
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <AccountCircleIcon />
-      <TextField
-        id={`editFormName${id}`}
-        variant="filled"
-        size="small"
-        type="text"
-        name="name"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        value={newName}
-        onChange={handleChange}
-      />
+    <>
+      <StyledForm onSubmit={handleSubmit}>
+        <AccountCircleIcon />
+        <TextField
+          id={`editFormName${id}`}
+          variant="filled"
+          size="small"
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+          value={newName}
+          onChange={handleChange}
+        />
 
-      <TextField
-        id={`editFormNumber${id}`}
-        variant="filled"
-        size="small"
-        type="tel"
-        name="number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        value={newNumber}
-        onChange={handleChange}
-      />
-      <ButtonWrap>
-        <button
-          id={`closeEditFormBtn${id}`}
-          type="button"
-          disabled={isLoading === 'edit'}
-          onClick={closeEditForm}
-        >
-          <DeleteIcon id={`editFormCloseIcon${id}`} />
-        </button>
-        <button
-          id={`submitEditFormBtn${id}`}
-          type="submit"
-          disabled={isLoading === 'edit'}
-        >
-          <EditIcon id={`editFormSubmitIcon${id}`} />
-        </button>
-      </ButtonWrap>
-    </StyledForm>
+        <TextField
+          id={`editFormNumber${id}`}
+          variant="filled"
+          size="small"
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          value={newNumber}
+          onChange={handleChange}
+        />
+        {isLoading === 'edit' ? (
+          <CircularProgress />
+        ) : (
+          <ButtonWrap>
+            <button
+              id={`closeEditFormBtn${id}`}
+              type="button"
+              disabled={isLoading === 'edit'}
+              onClick={closeEditForm}
+            >
+              <DeleteIcon id={`editFormCloseIcon${id}`} />
+            </button>
+            <button
+              id={`submitEditFormBtn${id}`}
+              type="submit"
+              disabled={isLoading === 'edit'}
+            >
+              <EditIcon id={`editFormSubmitIcon${id}`} />
+            </button>
+          </ButtonWrap>
+        )}
+      </StyledForm>
+    </>
   );
 };
 

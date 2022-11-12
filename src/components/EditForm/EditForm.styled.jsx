@@ -7,6 +7,7 @@ export const StyledForm = styled.form`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
 
   /* input border */
   .css-19mk8g1-MuiInputBase-root-MuiFilledInput-root:after {

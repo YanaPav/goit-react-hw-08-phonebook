@@ -1,10 +1,12 @@
 // react
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // libraries
 import TextField from '@mui/material/TextField';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // redux-components
 import { signUp } from 'redux/auth/authOperations';
+import { selectAuthError } from 'redux/auth/authSelectors';
 // components
 import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
@@ -13,6 +15,11 @@ import { CustomBtn } from '../Common/CustomBtn.styled';
 export const SignupForm = () => {
   const signUpForm = useRef(null);
   const dispatch = useDispatch();
+  const error = useSelector(selectAuthError);
+
+  useEffect(() => {
+    error?.type === 'signUp' && Notify.failure(`${error.message}`);
+  }, [error]);
 
   const onSubmit = e => {
     e.preventDefault();
