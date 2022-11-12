@@ -50,7 +50,7 @@ export const ContactItem = ({ name, number, id }) => {
                 onClick={() => dispatch(remove(id))}
               >
                 {isLoading === id ? (
-                  <span>'Deleting...'</span>
+                  <span>Deleting...</span>
                 ) : (
                   <span>Delete</span>
                 )}

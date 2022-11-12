@@ -36,13 +36,6 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
 
   console.log(isLoading);
 
-  const isDuplicate = newName => {
-    const result = contacts?.find(
-      contactItem => contactItem.name?.toLowerCase() === newName?.toLowerCase()
-    );
-    return result;
-  };
-
   useEffect(() => {
     error?.type === 'edit' && Notify.failure(`${error.message}`);
   }, [error]);
@@ -77,6 +70,11 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
 
     return () => window.removeEventListener('click', editFormClickHandler);
   }, [closeEditForm, editFormBtn, editFormBtnText, id]);
+
+  const isDuplicate = newName => {
+    const result = contacts?.find(contactItem => contactItem.name === newName);
+    return result;
+  };
 
   const addContactToStore = async contactObject => {
     if (isDuplicate(contactObject.name)) {

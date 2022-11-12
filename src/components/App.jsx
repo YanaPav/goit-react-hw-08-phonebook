@@ -9,6 +9,7 @@ import { selectIsLoading, selectToken } from 'redux/auth/authSelectors';
 import { HomePage } from '../pages/HomePage/HomePage';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { ContactsPage } from '../pages/ContactsPage/ContactsPage';
+import { NotFoundPage } from '../pages/NotFoundPage/NotFoundPage';
 // components
 import { SignupForm } from './SignupForm/SignupForm';
 import { NavBar } from './NavBar/NavBar';
@@ -41,6 +42,7 @@ export const App = () => {
             <Route element={<PrivateRoute />}>
               <Route path="/contacts" element={<ContactsPage />} />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       )}

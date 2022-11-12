@@ -3,36 +3,54 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const HomePageWrap = styled.div`
-  margin-top: 60px;
+  img {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-  @media screen and (min-width: 430px) {
+  @media screen and (min-width: 670px) {
+    margin-top: 60px;
+
     align-items: center;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
-  }
 
-  img {
-    margin-right: -60px;
+    img {
+      width: 350px;
+    }
   }
 `;
 
-export const HomePageText = styled.span`
-  max-width: 300px;
+export const MobileText = styled.p`
+  text-align: center;
+  font-weight: 600;
+`;
+
+export const HomePageText = styled.div`
   display: block;
   text-align: center;
-  margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
+  width: 80%;
+  margin-bottom: 40px;
+
+  p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.5;
+  }
 
   a {
     margin-top: 8px;
     display: block;
   }
 
-  @media screen and (min-width: 430px) {
-    max-width: 300px;
+  @media screen and (min-width: 670px) {
+    width: 250px;
   }
 `;
 

@@ -30,6 +30,7 @@ export const StyledBtn = styled.button`
 `;
 
 export const ButtonWrap = styled.div`
+  margin-top: 4px;
   display: flex;
   gap: 8px;
 `;

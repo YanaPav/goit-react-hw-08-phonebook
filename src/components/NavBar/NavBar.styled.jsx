@@ -15,5 +15,5 @@ export const Header = styled.header`
 export const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `;
