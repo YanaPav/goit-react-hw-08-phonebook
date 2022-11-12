@@ -10,17 +10,29 @@ export const StyledForm = styled.form`
   align-items: center;
 `;
 
+export const MobileInputsWrap = styled.div`
+  .MuiFormControl-root {
+    display: block;
+  }
+  @media screen and (min-width: 670px) {
+    display: flex;
+    gap: 10px;
+  }
+`;
+
 export const ButtonWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     color: transparent;
     border: none;
     background-color: transparent;
-    transition: color 500ms linear;
     cursor: pointer;
   }
 `;

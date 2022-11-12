@@ -19,6 +19,7 @@ import {
   EditIcon,
   DeleteIcon,
   ButtonWrap,
+  MobileInputsWrap,
 } from './EditForm.styled';
 import { StyledTextField } from '../Common/StyledTextField.styled';
 
@@ -109,31 +110,33 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     <>
       <StyledForm onSubmit={handleSubmit}>
         <AccountCircleIcon />
-        <StyledTextField
-          id={`editFormName${id}`}
-          variant="filled"
-          size="small"
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={newName}
-          onChange={handleChange}
-        />
+        <MobileInputsWrap>
+          <StyledTextField
+            id={`editFormName${id}`}
+            variant="filled"
+            size="small"
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            value={newName}
+            onChange={handleChange}
+          />
 
-        <StyledTextField
-          id={`editFormNumber${id}`}
-          variant="filled"
-          size="small"
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={newNumber}
-          onChange={handleChange}
-        />
+          <StyledTextField
+            id={`editFormNumber${id}`}
+            variant="filled"
+            size="small"
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={newNumber}
+            onChange={handleChange}
+          />
+        </MobileInputsWrap>
         {isLoading === 'edit' ? (
           <CircularProgress />
         ) : (

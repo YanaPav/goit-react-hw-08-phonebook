@@ -15,7 +15,7 @@ export const UserMenu = () => {
   const userName = useSelector(selectUserName);
   return (
     <MenuBox>
-      <p>Hi, {userName}</p>
+      <p>{userName}</p>
       <CustomBtn
         size="small"
         variant="text"
