@@ -4,7 +4,6 @@ export const StyledItem = styled.li`
   align-items: flex-start;
   display: flex;
   gap: 8px;
-  min-width: 600px;
 
   &:not(:last-child) {
     margin-bottom: 10px;
