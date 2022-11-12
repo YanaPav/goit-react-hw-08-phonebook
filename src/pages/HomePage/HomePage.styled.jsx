@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const HomePageWrap = styled.div`
+  margin-top: 60px;
+
   img {
+    margin-top: 30px;
     display: block;
     width: 50%;
     margin-left: auto;
@@ -11,15 +14,14 @@ export const HomePageWrap = styled.div`
   }
 
   @media screen and (min-width: 670px) {
-    margin-top: 60px;
-
+    margin-top: 100px;
     align-items: center;
     display: flex;
-    align-items: center;
     justify-content: center;
     gap: 20px;
 
     img {
+      margin-top: 0;
       width: 350px;
     }
   }
@@ -36,22 +38,28 @@ export const HomePageText = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  margin-bottom: 40px;
 
   p {
     margin: 0;
+    font-style: italic;
     font-size: 18px;
+    font-weight: 600;
     line-height: 1.5;
-  }
-
-  a {
-    margin-top: 8px;
-    display: block;
   }
 
   @media screen and (min-width: 670px) {
     width: 250px;
   }
+`;
+
+export const HomePageLogo = styled.div`
+  justify-content: center;
+  display: flex;
+  align-items: flex-end;
+  color: black;
+  font-weight: 800;
+  text-decoration: none;
+  margin-top: 8px;
 `;
 
 export const StyledLink = styled(Link)`
@@ -60,6 +68,7 @@ export const StyledLink = styled(Link)`
   color: #000000;
   cursor: pointer;
   display: flex;
+  justify-content: center;
   align-items: center;
   border: none;
   margin: 0;
@@ -68,7 +77,6 @@ export const StyledLink = styled(Link)`
   padding: 6px;
 
   position: relative;
-  text-align: center;
   text-decoration: none;
   text-rendering: geometricprecision;
   text-transform: uppercase;
@@ -80,6 +88,7 @@ export const StyledLink = styled(Link)`
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
+  margin-top: 40px;
 
   &:before {
     animation: opacityFallbackOut 0.5s step-end forwards;
@@ -109,6 +118,7 @@ export const StyledLink = styled(Link)`
   span {
     z-index: 1;
     position: relative;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #fc037b;
+    color: #fc037b;
   }
 `;

@@ -4,8 +4,9 @@ import {
   StyledLink,
   HomePageText,
   MobileText,
+  HomePageLogo,
 } from './HomePage.styled';
-import { Logo } from 'components/Logo/Logo';
+import { LogoIcon } from 'components/Logo/Logo.styled';
 // images
 import qr_code_desktop from 'images/qr_code_desktop.png';
 import qr_code_mobile from 'images/qr_code_mobile.png';
@@ -17,7 +18,12 @@ export const HomePage = () => {
   return (
     <HomePageWrap>
       <HomePageText>
-        <p>Keep important contacts with you all the time with</p> <Logo />
+        <p>Keep important contacts with you all the time with</p>
+        <HomePageLogo>
+          Ph
+          <LogoIcon />
+          neBOOK
+        </HomePageLogo>
         <StyledLink to={'/contacts'}>
           <span>Get started!</span>
         </StyledLink>
