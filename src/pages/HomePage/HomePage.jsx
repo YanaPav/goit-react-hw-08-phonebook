@@ -34,7 +34,7 @@ export const HomePage = () => {
       ) : (
         <>
           <img src={qr_code_mobile} alt="qr-code" />
-          <MobileText>Share width friends :)</MobileText>
+          <MobileText>Share with friends :)</MobileText>
         </>
       )}
     </HomePageWrap>
