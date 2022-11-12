@@ -8,16 +8,6 @@ export const StyledForm = styled.form`
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
-
-  /* input border */
-  .css-19mk8g1-MuiInputBase-root-MuiFilledInput-root:after {
-    border-color: white;
-  }
-
-  /* input label */
-  .css-11qvwfa-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: white;
-  }
 `;
 
 export const ButtonWrap = styled.div`

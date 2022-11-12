@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import TextField from '@mui/material/TextField';
 // redux-components
 import { add } from 'redux/contacts/contactsOperations';
 import {
@@ -14,6 +13,7 @@ import {
 // components
 import { StyledForm } from '../Common/StyledForm.styled';
 import { CustomBtn } from '../Common/CustomBtn.styled';
+import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
 export const ContactForm = () => {
@@ -70,7 +70,7 @@ export const ContactForm = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <TextField
+      <StyledTextField
         id="contactFormName"
         label="Name"
         variant="filled"
@@ -84,7 +84,7 @@ export const ContactForm = () => {
         onChange={handleChange}
       />
 
-      <TextField
+      <StyledTextField
         id="contactFormNumber"
         label="Number"
         variant="filled"

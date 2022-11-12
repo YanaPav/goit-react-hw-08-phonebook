@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 // redux-components
 import {
@@ -21,6 +20,7 @@ import {
   DeleteIcon,
   ButtonWrap,
 } from './EditForm.styled';
+import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
 export const EditForm = ({ id, name, number, closeEditForm }) => {
@@ -111,7 +111,7 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     <>
       <StyledForm onSubmit={handleSubmit}>
         <AccountCircleIcon />
-        <TextField
+        <StyledTextField
           id={`editFormName${id}`}
           variant="filled"
           size="small"
@@ -124,7 +124,7 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
           onChange={handleChange}
         />
 
-        <TextField
+        <StyledTextField
           id={`editFormNumber${id}`}
           variant="filled"
           size="small"

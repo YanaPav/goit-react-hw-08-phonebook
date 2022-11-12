@@ -1,8 +1,6 @@
 // react
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// libraries
-import CircularProgress from '@mui/material/CircularProgress';
 // redux-components
 import { fetch } from 'redux/contacts/contactsOperations';
 import { selectFilter } from 'redux/filter/filterSelectors';
@@ -14,6 +12,7 @@ import {
 // components
 import { ContactItem } from '../ContactItem/ContactItem';
 import { StyledList } from './ContactList.styled';
+import { StyledCircularLoader } from './ContactList.styled';
 
 //
 export const ContactList = () => {
@@ -35,7 +34,7 @@ export const ContactList = () => {
   return (
     <>
       {error?.type === 'fetch' && <div>{error.message}</div>}
-      {isLoading === 'fetch' && <CircularProgress />}
+      {isLoading === 'fetch' && <StyledCircularLoader />}
       {contacts && (
         <StyledList>
           {filtredContacts?.map(({ name, number, id }) => {

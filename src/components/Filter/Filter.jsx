@@ -1,12 +1,11 @@
 // react
 import { useSelector, useDispatch } from 'react-redux';
-// libraries
-import TextField from '@mui/material/TextField';
 // redux-components
 import { addFilter } from 'redux/filter/filterSlice';
 import { selectFilter } from 'redux/filter/filterSelectors';
 // components
 import { StyledForm } from '../Common/StyledForm.styled';
+import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
 export const Filter = () => {
@@ -19,7 +18,7 @@ export const Filter = () => {
 
   return (
     <StyledForm>
-      <TextField
+      <StyledTextField
         id="filterInput"
         label="Find contact by name"
         variant="filled"
