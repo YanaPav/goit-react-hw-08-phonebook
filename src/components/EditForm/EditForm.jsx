@@ -35,8 +35,6 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   const editFormBtn = document.getElementById(`editFormBtn${id}`);
   const editFormBtnText = document.getElementById(`editFormBtnText${id}`);
 
-  console.log(isLoading);
-
   useEffect(() => {
     error?.type === 'edit' && Notify.failure(`${error.message}`);
   }, [error]);
