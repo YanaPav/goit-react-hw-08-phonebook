@@ -8,7 +8,7 @@ import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 
 //
-export const ContactsPage = () => {
+const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
 
   return (
@@ -26,3 +26,5 @@ export const ContactsPage = () => {
     </>
   );
 };
+
+export default ContactsPage;

@@ -1,4 +1,5 @@
 // react
+import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 // redux-components
@@ -25,7 +26,9 @@ export const NavBar = () => {
         </Container>
       </Header>
       <Container>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </Container>
     </>
   );

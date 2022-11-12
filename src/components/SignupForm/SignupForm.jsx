@@ -12,7 +12,7 @@ import { CustomBtn } from '../Common/CustomBtn.styled';
 import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
-export const SignupForm = () => {
+const SignupForm = () => {
   const signUpForm = useRef(null);
   const dispatch = useDispatch();
   const error = useSelector(selectAuthError);
@@ -69,3 +69,5 @@ export const SignupForm = () => {
     </>
   );
 };
+
+export default SignupForm;

@@ -5,7 +5,7 @@ import { LoginForm } from 'components/LoginForm/LoginForm';
 import { LoginPageText } from './LoginPage.styled';
 
 //
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <>
       <LoginForm />
@@ -15,3 +15,5 @@ export const LoginPage = () => {
     </>
   );
 };
+
+export default LoginPage;

@@ -1,21 +1,22 @@
 // react
-import React, { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 // redux-components
 import { current } from 'redux/auth/authOperations';
 import { selectIsLoading, selectToken } from 'redux/auth/authSelectors';
 // pages
-import { HomePage } from '../pages/HomePage/HomePage';
-import { LoginPage } from '../pages/LoginPage/LoginPage';
-import { ContactsPage } from '../pages/ContactsPage/ContactsPage';
-import { NotFoundPage } from '../pages/NotFoundPage/NotFoundPage';
+import { HomePage } from 'pages/HomePage/HomePage';
 // components
-import { SignupForm } from './SignupForm/SignupForm';
 import { NavBar } from './NavBar/NavBar';
 import { Loader } from './Common/Loader.styled';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
+
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const SignupForm = lazy(() => import('./SignupForm/SignupForm'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 //
 export const App = () => {
