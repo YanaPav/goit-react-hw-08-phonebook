@@ -71,12 +71,18 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
   }, [closeEditForm, editFormBtn, editFormBtnText, id]);
 
   const isDuplicate = newName => {
-    const result = contacts?.find(contactItem => contactItem.name === newName);
+    const result = contacts?.find(
+      contactItem => contactItem.name.toLowerCase() === newName.toLowerCase()
+    );
     return result;
   };
 
   const addContactToStore = async contactObject => {
-    if (isDuplicate(contactObject.name)) {
+    if (name === newName && number === newNumber) {
+      closeEditForm();
+      return;
+    }
+    if (isDuplicate(contactObject.name) && number === newNumber) {
       Notify.warning(`${contactObject.name} is alredy in contacts`);
       return;
     }
