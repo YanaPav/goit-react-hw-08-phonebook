@@ -24,6 +24,9 @@ export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const namePattern =
+    /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+
   const isDuplicate = name => {
     const result = contacts?.find(
       contactItem => contactItem.name?.toLowerCase() === name.toLowerCase()
@@ -77,7 +80,7 @@ export const ContactForm = () => {
         type="text"
         name="name"
         size="small"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        pattern={namePattern}
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
         value={name}
@@ -88,11 +91,13 @@ export const ContactForm = () => {
         id="contactFormNumber"
         label="Number"
         variant="filled"
-        type="tel"
         name="number"
         size="small"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        inputProps={{
+          // pattern: /\+\d{1,9}/,
+          title:
+            'number  must be digits and can contain spaces, dashes, parentheses and can start with +',
+        }}
         required
         value={number}
         onChange={handleChange}
