@@ -6,6 +6,10 @@ export const StyledTextField = styled(TextField)`
     color: white;
   }
 
+  & label.Mui-focused.Mui-error {
+    color: #d32f2f;
+  }
+
   & .MuiFilledInput-root:after {
     border-bottom-color: white;
   }

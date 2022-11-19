@@ -7,9 +7,10 @@ import { current } from 'redux/auth/authOperations';
 import { selectIsLoading, selectToken } from 'redux/auth/authSelectors';
 // pages
 import { HomePage } from 'pages/HomePage/HomePage';
+// shared-components
+import { Loader } from 'shared/components/Loaders/Loader.styled';
 // components
 import { NavBar } from './NavBar/NavBar';
-import { Loader } from './Common/Loader.styled';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { PublicRoute } from './PublicRoute/PublicRoute';
 
@@ -30,7 +31,7 @@ export const App = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading === current ? (
         <Loader />
       ) : (
         <Routes>

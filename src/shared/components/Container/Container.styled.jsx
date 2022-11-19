@@ -10,8 +10,8 @@ export const Container = styled.div`
     width: 320px;
   }
 
-  @media screen and (min-width: 670px) {
-    width: 670px;
+  @media screen and (min-width: 780px) {
+    width: 780px;
   }
   /* overflow: hidden; */
 `;

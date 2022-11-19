@@ -16,4 +16,22 @@ export const HeaderWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media screen and (min-width: 320px) {
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media screen and (min-width: 780px) {
+    width: 780px;
+  }
+`;
+
+export const MenuWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
 `;

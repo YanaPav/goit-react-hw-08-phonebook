@@ -1,3 +1,5 @@
+// shared-components
+import { LogoIcon } from 'shared/components/Logo/Logo.styled';
 // components
 import {
   HomePageWrap,
@@ -6,7 +8,6 @@ import {
   MobileText,
   HomePageLogo,
 } from './HomePage.styled';
-import { LogoIcon } from 'components/Logo/Logo.styled';
 // images
 import qr_code_desktop from 'images/qr_code_desktop.png';
 import qr_code_mobile from 'images/qr_code_mobile.png';

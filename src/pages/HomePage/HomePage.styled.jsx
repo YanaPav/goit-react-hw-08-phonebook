@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-// react
 import { Link } from 'react-router-dom';
 
+//
 export const HomePageWrap = styled.div`
   margin-top: 60px;
 
@@ -22,7 +22,7 @@ export const HomePageWrap = styled.div`
 
     img {
       margin-top: 0;
-      width: 350px;
+      width: 400px;
     }
   }
 `;

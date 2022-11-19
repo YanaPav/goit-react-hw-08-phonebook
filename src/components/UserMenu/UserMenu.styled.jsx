@@ -1,16 +1,7 @@
 import styled from 'styled-components';
-// libraries
-import Button from '@mui/material/Button';
 
-export const LogOutBtn = styled(Button)`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: white;
-  border: white;
-
-  span {
-    color: white;
-    border: white;
+export const UserName = styled.p`
+  @media screen and (min-width: 670px) {
+    font-size: 20px;
   }
 `;

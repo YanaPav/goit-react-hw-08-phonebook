@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// libraries
 import ClearIcon from '@mui/icons-material/Clear';
 import DoneIcon from '@mui/icons-material/Done';
 

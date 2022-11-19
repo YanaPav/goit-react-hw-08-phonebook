@@ -1,7 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
-import bg_image from '../../images/bg_image.jpg';
+import bg_image from 'images/bg_image.jpg';
 
 export const GlobalStyle = createGlobalStyle`
+    * {
+        box-sizing: border-box;
+    }
+
 
     body {
      background: url(${bg_image}) no-repeat center top fixed;
@@ -16,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    bo
     }
 
     code {

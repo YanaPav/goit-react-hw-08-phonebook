@@ -1,8 +1,15 @@
 // react
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useFormik } from 'formik';
+// shared-components
+import { validateContact } from 'shared/newContactSettings/formValidation';
+import { isDuplicate } from 'shared/newContactSettings/isDuplicate';
+import { StyledForm } from 'shared/components/StyledForm/StyledForm.styled';
+import { StyledTextField } from 'shared/components/StyledTextField/StyledTextField.styled';
+import { CustomBtn } from 'shared/components/Button/CustomBtn.styled';
 // redux-components
 import { add } from 'redux/contacts/contactsOperations';
 import {
@@ -10,10 +17,6 @@ import {
   selectLoading,
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
-// components
-import { StyledForm } from '../Common/StyledForm.styled';
-import { CustomBtn } from '../Common/CustomBtn.styled';
-import { StyledTextField } from '../Common/StyledTextField.styled';
 
 //
 export const ContactForm = () => {
@@ -21,55 +24,37 @@ export const ContactForm = () => {
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectContactsError);
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
 
-  const namePattern =
-    /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-
-  const isDuplicate = name => {
-    const result = contacts?.find(
-      contactItem => contactItem.name?.toLowerCase() === name.toLowerCase()
-    );
-    return result;
+  const initialValues = {
+    name: '',
+    number: '',
   };
+
+  const formik = useFormik({
+    initialValues,
+    validate: validateContact,
+    enableReinitialize: true,
+    onSubmit: ({ name, number }, { resetForm }) => {
+      addContactToStore({ name, number });
+      if (!formik.errors.name && !formik.errors.number)
+        resetForm({ initialValues });
+    },
+  });
 
   useEffect(() => {
     error?.type === 'add' && Notify.failure(`${error.message}`);
   }, [error]);
 
-  const addContactToStore = contactObject => {
-    if (isDuplicate(contactObject.name)) {
+  function addContactToStore(contactObject) {
+    if (isDuplicate(contactObject, contacts)) {
       Notify.warning(`${contactObject.name} is alredy in contacts`);
       return;
     }
 
     dispatch(add(contactObject));
-    resetState();
-  };
+  }
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    if (name === 'name') setName(value);
-    if (name === 'number') setNumber(value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    const contactObj = {
-      name,
-      number,
-    };
-
-    addContactToStore(contactObj);
-  };
-
-  const resetState = () => {
-    setName('');
-    setNumber('');
-  };
+  const { handleSubmit, handleChange, values, touched, errors } = formik;
 
   return (
     <StyledForm onSubmit={handleSubmit}>
@@ -80,27 +65,25 @@ export const ContactForm = () => {
         type="text"
         name="name"
         size="small"
-        pattern={namePattern}
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
-        value={name}
+        value={values.name}
         onChange={handleChange}
+        error={touched.name && Boolean(errors.name)}
+        helperText={touched.name && errors.name}
       />
 
       <StyledTextField
         id="contactFormNumber"
         label="Number"
+        type="tel"
         variant="filled"
         name="number"
         size="small"
-        inputProps={{
-          // pattern: /\+\d{1,9}/,
-          title:
-            'number  must be digits and can contain spaces, dashes, parentheses and can start with +',
-        }}
         required
-        value={number}
+        value={values.number}
         onChange={handleChange}
+        error={touched.number && Boolean(errors.number)}
+        helperText={touched.number && errors.number}
       />
 
       <CustomBtn type="submit" disabled={isLoading === 'add'}>

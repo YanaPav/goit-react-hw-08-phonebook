@@ -11,8 +11,9 @@ import {
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
 import { remove } from 'redux/contacts/contactsOperations';
+// shared-components
+import { CustomBtn } from 'shared/components/Button/CustomBtn.styled';
 // components
-import { CustomBtn } from '../Common/CustomBtn.styled';
 import { EditForm } from '../EditForm/EditForm';
 import { StyledItem, ButtonWrap } from './ContactItem.styled';
 
@@ -61,8 +62,8 @@ export const ContactItem = ({ name, number, id }) => {
       ) : (
         <EditForm
           id={id}
-          name={name}
-          number={number}
+          startName={name}
+          startNumber={number}
           closeEditForm={() => setIsEditing(false)}
         />
       )}

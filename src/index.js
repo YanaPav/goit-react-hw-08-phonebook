@@ -1,16 +1,16 @@
+// react
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from 'components/App';
-import './index.css';
-import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from 'redux-persist/integration/react'
-import { persistor } from './redux/store'
-import { GlobalStyle } from './components/Common/GlobalStyles'
-
-
-
+// react-components
+import { store } from 'redux/store'
+import { persistor } from 'redux/store'
+// shared-components
+import { GlobalStyle } from 'shared/components/GlobalStyles/GlobalStyles'
+// components
+import { App } from 'components/App';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter basename='goit-react-hw-08-phonebook'>
+          <App />
           <GlobalStyle />
-            <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>

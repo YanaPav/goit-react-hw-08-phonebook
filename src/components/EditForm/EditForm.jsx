@@ -1,10 +1,16 @@
 // react
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 // libraries
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useFormik } from 'formik';
+// shared-components
+import { validateContact } from 'shared/newContactSettings/formValidation';
+import { isDuplicate } from 'shared/newContactSettings/isDuplicate';
+import { CircularLoader } from 'shared/components/Loaders/CircularLoader.styled';
+import { StyledTextField } from 'shared/components/StyledTextField/StyledTextField.styled';
 // redux-components
 import {
   selectContacts,
@@ -20,24 +26,38 @@ import {
   ButtonWrap,
   MobileInputsWrap,
 } from './EditForm.styled';
-import { StyledTextField } from '../Common/StyledTextField.styled';
-import { CircularLoader } from '../Common/CircularLoader.styled';
 
 //
-export const EditForm = ({ id, name, number, closeEditForm }) => {
+export const EditForm = ({ id, startName, startNumber, closeEditForm }) => {
   const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectLoading);
   const error = useSelector(selectContactsError);
   const dispatch = useDispatch();
-  const [newName, setNewName] = useState(name);
-  const [newNumber, setNewNumber] = useState(number);
 
-  const editFormBtn = document.getElementById(`editFormBtn${id}`);
-  const editFormBtnText = document.getElementById(`editFormBtnText${id}`);
+  const initialValues = {
+    name: startName,
+    number: startNumber,
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validate: validateContact,
+    enableReinitialize: true,
+    onSubmit: ({ name, number }) => {
+      if (name === startName && number === startNumber) {
+        closeEditForm();
+        return;
+      }
+      addContactToStore({ name, number });
+    },
+  });
 
   useEffect(() => {
     error?.type === 'edit' && Notify.failure(`${error.message}`);
   }, [error]);
+
+  const editFormBtn = document.getElementById(`editFormBtn${id}`);
+  const editFormBtnText = document.getElementById(`editFormBtnText${id}`);
 
   useEffect(() => {
     window.addEventListener('click', editFormClickHandler);
@@ -62,7 +82,7 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
         target !== editFormCloseIcon &&
         target !== editFormSubmitIcon &&
         target !== editFormSubmitIcon.children[0];
-      // остання умова - обробка бага при натисканні на path елемента svg
+      // the last condition is the bug processing on svg element path click
 
       if (isClickOutEditForm) closeEditForm();
     }
@@ -70,19 +90,8 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     return () => window.removeEventListener('click', editFormClickHandler);
   }, [closeEditForm, editFormBtn, editFormBtnText, id]);
 
-  const isDuplicate = newName => {
-    const result = contacts?.find(
-      contactItem => contactItem.name.toLowerCase() === newName.toLowerCase()
-    );
-    return result;
-  };
-
   const addContactToStore = async contactObject => {
-    if (name === newName && number === newNumber) {
-      closeEditForm();
-      return;
-    }
-    if (isDuplicate(contactObject.name) && number === newNumber) {
+    if (isDuplicate(contactObject, contacts)) {
       Notify.warning(`${contactObject.name} is alredy in contacts`);
       return;
     }
@@ -92,23 +101,7 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
     if (!result.error) closeEditForm();
   };
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    if (name === 'name') setNewName(value);
-    if (name === 'number') setNewNumber(value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    const contactObj = {
-      name: newName,
-      number: newNumber,
-    };
-
-    addContactToStore(contactObj);
-  };
+  const { handleSubmit, handleChange, values, touched, errors } = formik;
 
   return (
     <>
@@ -121,11 +114,11 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
             size="small"
             type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={newName}
+            value={values.name}
             onChange={handleChange}
+            error={touched.name && Boolean(errors.name)}
+            helperText={touched.name && errors.name}
           />
 
           <StyledTextField
@@ -134,11 +127,11 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
             size="small"
             type="tel"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={newNumber}
+            value={values.number}
             onChange={handleChange}
+            error={touched.number && Boolean(errors.number)}
+            helperText={touched.number && errors.number}
           />
         </MobileInputsWrap>
         {isLoading === 'edit' ? (
@@ -168,8 +161,8 @@ export const EditForm = ({ id, name, number, closeEditForm }) => {
 };
 
 EditForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  startName: PropTypes.string.isRequired,
+  startNumber: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   closeEditForm: PropTypes.func.isRequired,
 };

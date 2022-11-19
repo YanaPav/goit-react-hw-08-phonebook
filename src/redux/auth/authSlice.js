@@ -12,7 +12,7 @@ const authSlice = createSlice({
     },
     extraReducers: {
         [signUp.pending](state) {
-            state.loading = true
+            state.loading = 'signUp'
             state.error = null
         },
         [signUp.fulfilled](state, { payload }) {
@@ -28,7 +28,7 @@ const authSlice = createSlice({
         },
         
         [login.pending]: (store) => {
-            store.loading = true;
+            store.loading = 'login';
             store.error = null;
         },
         [login.fulfilled]: (store, {payload}) => {
@@ -43,7 +43,7 @@ const authSlice = createSlice({
         },
 
         [logout.pending]: (store) => {
-            store.loading = true;
+            store.loading = 'logout';
             store.error = null;
         },
         [logout.fulfilled]: (store) => {
@@ -58,7 +58,7 @@ const authSlice = createSlice({
         },
 
         [current.pending]: (store) => {
-            store.loading = true;
+            store.loading = 'current';
             store.error = null;
         },
         [current.fulfilled]: (store, { payload }) => {

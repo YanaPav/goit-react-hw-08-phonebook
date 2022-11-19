@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 // redux-components
 import { addFilter } from 'redux/filter/filterSlice';
 import { selectFilter } from 'redux/filter/filterSelectors';
-// components
-import { StyledForm } from '../Common/StyledForm.styled';
-import { StyledTextField } from '../Common/StyledTextField.styled';
+// shared-components
+import { StyledForm } from 'shared/components/StyledForm/StyledForm.styled';
+import { StyledTextField } from 'shared/components/StyledTextField/StyledTextField.styled';
 
 //
 export const Filter = () => {

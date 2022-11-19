@@ -9,10 +9,11 @@ import {
   selectLoading,
   selectContactsError,
 } from 'redux/contacts/contactsSelectors';
+// shared-components
+import { CircularLoader } from 'shared/components/Loaders/CircularLoader.styled';
 // components
 import { ContactItem } from '../ContactItem/ContactItem';
 import { StyledList } from './ContactList.styled';
-import { CircularLoader } from '../Common/CircularLoader.styled';
 
 //
 export const ContactList = () => {

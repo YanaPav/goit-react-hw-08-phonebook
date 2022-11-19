@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 // libraries
 import LogoutIcon from '@mui/icons-material/Logout';
 // redux-components
-import { selectUserName } from '../../redux/auth/authSelectors';
+import { selectUserName } from 'redux/auth/authSelectors';
 import { logout } from 'redux/auth/authOperations';
+// shared-components
+import { CustomBtn } from 'shared/components/Button/CustomBtn.styled';
 // components
-import { MenuBox } from '../Common/MenuBox.styled';
-import { CustomBtn } from '../Common/CustomBtn.styled';
+import { UserName } from './UserMenu.styled';
 
 //
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   return (
-    <MenuBox>
-      <p>{userName}</p>
+    <>
+      <UserName>{userName}</UserName>
       <CustomBtn
         size="small"
         variant="text"
@@ -25,6 +26,6 @@ export const UserMenu = () => {
         <span>Log out</span>
         <LogoutIcon />
       </CustomBtn>
-    </MenuBox>
+    </>
   );
 };

@@ -1,4 +1,3 @@
-// components
 import { StyledLogoLink, LogoIcon } from './Logo.styled';
 
 export const Logo = () => {

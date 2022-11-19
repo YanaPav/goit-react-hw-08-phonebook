@@ -7,15 +7,26 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 //
 export const StyledLogoLink = styled(Link)`
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   color: white;
   font-weight: 800;
   text-decoration: none;
+
+  @media screen and (min-width: 670px) {
+    font-size: 24px;
+  }
 `;
 
 export const LogoIcon = styled(AccountCircleIcon)`
   &.MuiSvgIcon-root {
+    display: flex;
+    align-items: flex-end;
     width: 16px;
     height: 16px;
+
+    @media screen and (min-width: 670px) {
+      width: 20px;
+      height: 20px;
+    }
   }
 `;
