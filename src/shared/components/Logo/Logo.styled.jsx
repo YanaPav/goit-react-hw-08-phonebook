@@ -12,7 +12,7 @@ export const StyledLogoLink = styled(Link)`
   font-weight: 800;
   text-decoration: none;
 
-  @media screen and (min-width: 670px) {
+  @media screen and (min-width: 780px) {
     font-size: 24px;
   }
 `;
@@ -24,7 +24,7 @@ export const LogoIcon = styled(AccountCircleIcon)`
     width: 16px;
     height: 16px;
 
-    @media screen and (min-width: 670px) {
+    @media screen and (min-width: 780px) {
       width: 20px;
       height: 20px;
     }
